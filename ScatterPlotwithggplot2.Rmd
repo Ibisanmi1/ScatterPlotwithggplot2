@@ -18,8 +18,10 @@ output:
 
 ```{r, echo = F}
 #Install and load ggplot2
-install.packages('ggplot2')
+#install.packages('ggplot2')
 library(ggplot2)
+# Create a folder named "images"
+dir.create("results")
 
 ```  
 
@@ -31,9 +33,7 @@ library(ggplot2)
 
 #for EGFR
 # Load required packages
-
 library(ggplot2)
-
 # Data
 MMGBSA <- c(-50.710, -50.259, -46.969, -54.282, -29.207, -58.001, -41.030, -43.614, -35.381, -46.151, -49.371, -48.520, -34.601, -41.861, -44.773, -48.783, -47.583, -43.556, -55.224, -21.193, -101.290)
 DOCK_SCORES <- c(-8.409, -7.287, -9.430, -8.392, -9.134, -9.177, -9.453, -6.953, -7.132, -10.730, -8.366, -8.228, -7.522, -8.537, -9.165, -11.016, -8.671, -7.452, -9.968, -3.150, -13.652)
@@ -46,23 +46,26 @@ EGFRplot <- ggplot(data, aes(x = MMGBSA, y = DOCK_SCORES)) +
   geom_point(size = 4, color = "steelblue", alpha = 0.8) +
   geom_smooth(method = "lm", color = "red", se = FALSE, linetype = "dashed") +
   labs(
-    x = "MMGBSA (ΔGbind) ",
-    y = "Docking Scores (kcal/mol) ",
-    title = "                                                   Binding Free Energy vs Docking Scores (EGFR)",
+    x = "MMGBSA (DeltaGbind)",
+    y = "Docking Scores (kcal/mol)",
+    title = "                  Binding Free Energy vs Docking Scores (EGFR)",
     caption = "Data Source: EGFR"
   ) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10)
+    axis.text = element_text(size = 10),
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white")
   )
 
 # Print the plot
 print(EGFRplot)
 
-# Save the plot
-ggsave("images/EGFRplot.png", plot, width = 8, height = 6, dpi = 300)
+# Save the plot in the /results directory
+ggsave("results/EGFRplot.jpg", plot = EGFRplot, width = 8, height = 6, dpi = 300)
+
 
 
 ```
@@ -90,22 +93,25 @@ IGFRplot <- ggplot(data, aes(x = MMGBSA, y = DOCK_SCORES)) +
   geom_point(size = 4, color = "steelblue", alpha = 0.8) +
   geom_smooth(method = "lm", color = "red", se = FALSE, linetype = "dashed") +
   labs(
-    x = "MMGBSA (ΔGbind) ",
-    y = "Docking Scores (kcal/mol) ",
-    title = "                                                   Binding Free Energy vs Docking Scores (IGF1R)",
-    caption = "Data Source: IGF1R"
+    x = "MMGBSA (DeltaGbind)",
+    y = "Docking Scores (kcal/mol)",
+     title = "                  Binding Free Energy vs Docking Scores (IGFR)",
+    caption = "Data Source: IGFR"
   ) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10)
+    axis.text = element_text(size = 10),
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white")
   )
 
-# Save the plot
-ggsave("images/IGFRplot.png", plot, width = 8, height = 6, dpi = 300)
-
+# Print the plot
 print(IGFRplot)
+
+# Save the plot in the /results directory
+ggsave("results/IGFRplot.jpg", plot = IGFRplot, width = 8, height = 6, dpi = 300)
 
 
 
@@ -135,9 +141,9 @@ ESRplot <- ggplot(data, aes(x = MMGBSA, y = DOCK_SCORES)) +
   geom_point(size = 4, color = "steelblue", alpha = 0.8) +
   geom_smooth(method = "lm", color = "red", se = FALSE, linetype = "dashed") +
   labs(
-    x = "MMGBSA (ΔGbind) ",
-    y = "Docking Scores (kcal/mol) ",
-    title = "                                                   Binding Free Energy vs Docking Scores (ESR)",
+    x = "MMGBSA (DeltaGbind)",
+    y = "Docking Scores (kcal/mol)",
+     title = "                  Binding Free Energy vs Docking Scores (ESR)",
     caption = "Data Source: ESR"
   ) +
   theme_minimal() +
@@ -145,12 +151,16 @@ ESRplot <- ggplot(data, aes(x = MMGBSA, y = DOCK_SCORES)) +
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 12),
     axis.text = element_text(size = 10),
-    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white")
   )
 
-# Save the plot
-ggsave("ESRplot.png", plot, width = 8, height = 6, dpi = 300)
+# Print the plot
 print(ESRplot)
+
+# Save the plot in the /results directory
+ggsave("results/ESRplot.jpg", plot = ESRplot, width = 8, height = 6, dpi = 300)
+
 
 
 ```
@@ -178,22 +188,26 @@ PGRplot <- ggplot(data, aes(x = MMGBSA, y = DOCK_SCORES)) +
   geom_point(size = 4, color = "steelblue", alpha = 0.8) +
   geom_smooth(method = "lm", color = "red", se = FALSE, linetype = "dashed") +
   labs(
-    x = "MMGBSA (ΔGbind) ",
-    y = "Docking Scores (kcal/mol) ",
-    title = "                                                   Binding Free Energy vs Docking Scores (ESR)",
-    caption = "Data Source: ESR"
+    x = "MMGBSA (DeltaGbind)",
+    y = "Docking Scores (kcal/mol)",
+     title = "                  Binding Free Energy vs Docking Scores (PGR)",
+    caption = "Data Source: PGR"
   ) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 12),
     axis.text = element_text(size = 10),
-    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white")
   )
 
-# Save the plot
-ggsave("PGRplot.png", plot, width = 8, height = 6, dpi = 300)
+# Print the plot
 print(PGRplot)
+
+# Save the plot in the /results directory
+ggsave("results/PGRplot.jpg", plot = PGRplot, width = 8, height = 6, dpi = 300)
+
 
 
 ```
@@ -209,7 +223,6 @@ print(PGRplot)
 # Data
 MMGBSA <- c(-35.407, -44.828, -31.373, -38.629, 6.928, -26.013, -30.560, -37.855, -20.505, -33.396, -20.387, -25.250, -14.341, -17.709, -41.659, 6.437, -38.297, -28.954, 0.670, -53.366)
 DOCK_SCORES <- c(-8.027, -9.182, -9.305, -10.019, -6.728, -8.503, -7.471, -9.074, -6.922, -8.894, -8.238, -8.620, -9.029, -8.063, -8.586, -8.079, -8.534, -6.530, 0.046, -8.316)
-
 # Create a data frame
 data <- data.frame(MMGBSA, DOCK_SCORES)
 
@@ -218,22 +231,26 @@ YAP1plot <- ggplot(data, aes(x = MMGBSA, y = DOCK_SCORES)) +
   geom_point(size = 4, color = "steelblue", alpha = 0.8) +
   geom_smooth(method = "lm", color = "red", se = FALSE, linetype = "dashed") +
   labs(
-    x = "MMGBSA (ΔGbind) ",
-    y = "Docking Scores (kcal/mol) ",
-    title = "                                                   Binding Free Energy vs Docking Scores (ESR)",
-    caption = "Data Source: ESR"
+    x = "MMGBSA (DeltaGbind)",
+    y = "Docking Scores (kcal/mol)",
+     title = "                  Binding Free Energy vs Docking Scores (YAP1)",
+    caption = "Data Source: YAP1"
   ) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = "bold"),
     axis.title = element_text(size = 12),
     axis.text = element_text(size = 10),
-    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white")
   )
 
-# Save the plot
-ggsave("YAP1plot.png", plot, width = 8, height = 6, dpi = 300)
+# Print the plot
 print(YAP1plot)
+
+# Save the plot in the /results directory
+ggsave("results/YAP1plot.jpg", plot = YAP1plot, width = 8, height = 6, dpi = 300)
+
 
 
 ```  
